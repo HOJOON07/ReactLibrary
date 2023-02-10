@@ -1,36 +1,37 @@
 import React, { useRef, useState } from "react";
-import dayjs from "dayjs";
-import "dayjs/locale/ko";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-
-dayjs.locale("ko"); // 한국말로 해줘야 함
-dayjs.extend(utc);
-dayjs.extend(timezone);
+import { add, format, sub, differenceInHours } from "date-fns";
+import addWeeks from "date-fns/addWeeks";
+import { ko } from "date-fns/locale";
+import { format as timeZoneFormat } from "date-fns-tz";
 
 export default function DateFns() {
   const [day, setDay] = useState("");
 
   const birthDayRef = useRef(null);
   const handleBirthDayChange = (e) => {
-    setDay(dayjs(e.target.value, "YYYY-MM-DD").format("dddd"));
+    setDay(format(new Date(e.target.value), "EEEE", { locale: ko }));
   };
-  const dayjsDate = dayjs();
-  const newDayjsDate = dayjsDate.add(1, "week");
-  const cloneNewDayjsDate = newDayjsDate.clone().add(1, "week");
+  const dateFnsDate = new Date();
+
+  const newDateFnsDate = add(dateFnsDate, { days: 1 });
+  const newDateFnsDate2 = addWeeks(newDateFnsDate, 1);
   return (
     <div>
       <h1>Date-fns</h1>
       <div>Imutable Check</div>
       <div>
-        {dayjsDate.format()}
+        {format(dateFnsDate, "yyyy-MM-dd")}
         <br />
-        {newDayjsDate.format()}
+        {format(newDateFnsDate, "yyyy-MM-dd")}
         <br />
-        {cloneNewDayjsDate.format()}
+        {format(newDateFnsDate2, "yyyy-MM-dd")}
         <br />
-        <div>Summer Time (New-York)</div>
-        <div>{dayjs.tz.guess()}</div>
+        <div style={{ color: "red" }}>Summer Time (New-York)</div>
+        {timeZoneFormat(
+          new Date("2018-03-10 13:00:00"),
+          "yyyy-MM-dd HH:mm:ssXXX",
+          { timeZone: "America/New_York" }
+        )}
         <div>
           2018년 3월 10일 13시에 하루 더하기:
           {/* {dayjs
@@ -40,21 +41,21 @@ export default function DateFns() {
         </div>
         <div>
           2018년 3월 10일 13시에 24시간 더하기:
-          {dayjs("2018-03-10 13:00:00").add(24, "hour").format()}
+          {/* {dayjs("2018-03-10 13:00:00").add(24, "hour").format()} */}
         </div>
         <div>leap year korea (New-York)</div>
         <div>
           2017년 1월 1일 1년 빼기:
-          {dayjs("2017-01-01").subtract(1, "year").format()}
+          {format(sub(new Date("2017-01-01"), { years: 1 }), "yyyy-MM- dd")}
         </div>
         <div>
           2017년 1월 1일 365일 빼기:
-          {dayjs("2017-01-01").subtract(365, "day").format()}
+          {format(sub(new Date("2017-01-01"), { days: 365 }), "yyyy-MM-dd")}
         </div>
       </div>
       <br />
       <div>한국어로 표기하기 07-17-2021을 2021년 7월 17일로 표기</div>
-      <div>{dayjs("07-17-2021").format("YYYY년 M월 D일")}</div>
+      {format(new Date("2022-02-14"), "yyyy년M월d일")}
       <div>자기 생일 요일 찾기</div>
       <div>
         <input type="date" ref={birthDayRef} onChange={handleBirthDayChange} />
@@ -65,7 +66,10 @@ export default function DateFns() {
       <div>두 날짜 비교</div>
       <div>2023-02-15 03:00 와 2023-02-16 19:00는 몇시간 차이인가??</div>
       <div>
-        {dayjs("2023-02-15 03:00").diff(dayjs("2023-02-16 19:00"), "hours")}
+        {differenceInHours(
+          new Date("2022-02-14 03:00"),
+          new Date("2022-02-15 02:00")
+        )}
         시간
       </div>
     </div>
