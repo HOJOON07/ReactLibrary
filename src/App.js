@@ -4,6 +4,7 @@ import MomentExample from "./components/Moment/MomentExample";
 import DayjsExample from "./components/Dayjs/DayjsExample";
 import DateFns from "./components/DateFns/DateFns";
 import TestMocking from "./components/TestMocking/TestMocking";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       {/* <DateFns></DateFns>
       <DayjsExample></DayjsExample>
       <MomentExample></MomentExample> */}
-      <TestMocking></TestMocking>
+      {/* <TestMocking></TestMocking> */}
+      <RecoilRoot></RecoilRoot>
     </div>
   );
 }
