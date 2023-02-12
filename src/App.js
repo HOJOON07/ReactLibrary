@@ -5,8 +5,10 @@ import "./App.css";
 // import DateFns from "./components/DateFns/DateFns";
 // import TestMocking from "./components/TestMocking/TestMocking";
 import { RecoilRoot } from "recoil";
-import Button from "./components/RecoilExample/Button";
-import Text from "./components/RecoilExample/Text";
+import TodoList from "./components/RecoilExample/Todo/TodoList";
+// import Button from "./components/RecoilExample/Button";
+// import Text from "./components/RecoilExample/Text";
+// import { CharacterCounter } from "./components/RecoilExample/c haracterCounter";
 
 function App() {
   return (
@@ -16,8 +18,10 @@ function App() {
       <MomentExample></MomentExample> */}
       {/* <TestMocking></TestMocking> */}
       <RecoilRoot>
-        <Button></Button>
+        {/* <Button></Button>
         <Text></Text>
+        <CharacterCounter></CharacterCounter> */}
+        <TodoList></TodoList>
       </RecoilRoot>
     </div>
   );
