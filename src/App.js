@@ -6,6 +6,7 @@ import "./App.css";
 // import TestMocking from "./components/TestMocking/TestMocking";
 import { RecoilRoot } from "recoil";
 import TodoList from "./components/RecoilExample/Todo/TodoList";
+import CurrentUserInfo from "./components/RecoilExample/CurrentUserInfo";
 // import Button from "./components/RecoilExample/Button";
 // import Text from "./components/RecoilExample/Text";
 // import { CharacterCounter } from "./components/RecoilExample/c haracterCounter";
@@ -22,6 +23,7 @@ function App() {
         <Text></Text>
         <CharacterCounter></CharacterCounter> */}
         <TodoList></TodoList>
+        <CurrentUserInfo></CurrentUserInfo>
       </RecoilRoot>
     </div>
   );
